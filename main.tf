@@ -12,3 +12,17 @@ module "networking-vpc" {
   private_cidrs    = [for i in range(1, 255, 2) : cidrsubnet(local.vpc_cidr, 8, i)]
   db_subnet_group  = true
 }
+
+module "database" {
+  source = "./database"
+  db_storage = 10
+  db_engin_version = "5.7.22"
+  db_instance_class = "db.t2.micro"
+  dbname = "rancher"
+  dbuser = "bobby"
+  dbpassword = "Aw-12@12"
+  db_identifier = "mtc-db"
+  skip_db_snapshot = true
+  db_subner_groupname = ""
+  vpc_sercurity_group_ids =[]
+}
