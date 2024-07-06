@@ -16,13 +16,13 @@ module "networking-vpc" {
 module "database" {
   source = "./database"
   db_storage = 10
-  db_engin_version = "5.7.22"
-  db_instance_class = "db.t2.micro"
+  db_engine_version = "5.7.44"
+  db_instance_class = "db.t3.micro"
   dbname = "rancher"
   dbuser = "bobby"
-  dbpassword = "Aw-12@12"
+  dbpassword = "Aw-12#12"
   db_identifier = "mtc-db"
   skip_db_snapshot = true
-  db_subner_groupname = ""
-  vpc_sercurity_group_ids =[]
+  db_subnet_group_name = module.networking-vpc.db_subnet_group_name[0]
+  vpc_security_group_ids = module.networking-vpc.db_security_group
 }
