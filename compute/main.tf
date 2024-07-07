@@ -35,7 +35,7 @@ resource "aws_instance" "mtc_node" {
   subnet_id              = var.public_subnets[count.index]
   user_data = templatefile(var.user_data_path,
      {
-        nodename = "mtc_node-${random_id.mtc_node_id[count.index].dec}"
+        nodename = "mtc-${random_id.mtc_node_id[count.index].dec}"
         dbuser = var.dbuser
         dbpass = var.dbpassword
         dbname = var.dbname
