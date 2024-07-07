@@ -13,8 +13,8 @@ resource "aws_lb_target_group" "mtc_tg" {
   protocol = var.tg_protocol
   vpc_id   = var.vpc_id
   lifecycle {
-      ignore_changes = [name]
-      create_before_destroy = true
+    ignore_changes        = [name]
+    create_before_destroy = true
   }
   health_check {
     healthy_threshold   = var.lb_healthy_threshold
@@ -24,12 +24,12 @@ resource "aws_lb_target_group" "mtc_tg" {
   }
 }
 
-resource "aws_lb_listener" "mtc_lb_listener"{
-    load_balancer_arn = aws_lb.mtc_lb.arn
-    port = var.listener_port #80
-    protocol = var.listener_protocol # "HTTP"
-    default_action {
-        type = "forward"
-        target_group_arn = aws_lb_target_group.mtc_tg.arn
-    }
+resource "aws_lb_listener" "mtc_lb_listener" {
+  load_balancer_arn = aws_lb.mtc_lb.arn
+  port              = var.listener_port     #80
+  protocol          = var.listener_protocol # "HTTP"
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.mtc_tg.arn
+  }
 }
